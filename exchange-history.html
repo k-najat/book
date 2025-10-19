@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des échanges - BookExchange</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">BookExchange</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Catalogue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Ajouter un livre</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav auth-nav">
+                    <li class="nav-item dropdown user-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i> <span class="username">Utilisateur</span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="profile.html">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="messages.html">Messages <span class="badge bg-danger message-badge d-none">0</span></a></li>
+                            <li><a class="dropdown-item active" href="exchange-history.html">Historique des échanges</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-link" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item login-link">
+                        <a class="nav-link" href="login.html">Connexion</a>
+                    </li>
+                    <li class="nav-item register-link">
+                        <a class="nav-link" href="register.html">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Message Container -->
+    <div class="flash-message-container"></div>
+
+    <!-- Exchange History Container -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4">Historique des échanges</h2>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Filtres</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="typeFilter" class="form-label">Type d'échange</label>
+                                <select class="form-select" id="typeFilter">
+                                    <option value="all">Tous</option>
+                                    <option value="loan">Prêt</option>
+                                    <option value="exchange">Échange</option>
+                                    <option value="sale">Vente</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="statusFilter" class="form-label">Statut</label>
+                                <select class="form-select" id="statusFilter">
+                                    <option value="all">Tous</option>
+                                    <option value="pending">En attente</option>
+                                    <option value="active">En cours</option>
+                                    <option value="completed">Terminé</option>
+                                    <option value="cancelled">Annulé</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="roleFilter" class="form-label">Rôle</label>
+                                <select class="form-select" id="roleFilter">
+                                    <option value="all">Tous</option>
+                                    <option value="owner">Propriétaire</option>
+                                    <option value="borrower">Emprunteur</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Échanges</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Livre</th>
+                                        <th>Type</th>
+                                        <th>Avec</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="exchangeHistoryTable">
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Chargement...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exchange Details Modal -->
+    <div class="modal fade" id="exchangeDetailsModal" tabindex="-1" aria-labelledby="exchangeDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exchangeDetailsModalLabel">Détails de l'échange</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="book-cover-container mb-3">
+                                <img src="assets/images/book-placeholder.svg" alt="Couverture du livre" class="img-fluid book-cover">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="exchange-book-title">Titre du livre</h4>
+                            <p class="exchange-book-author text-muted">Auteur</p>
+                            
+                            <div class="exchange-details mt-4">
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Type d'échange:</div>
+                                    <div class="col-md-8 exchange-type">-</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Statut:</div>
+                                    <div class="col-md-8 exchange-status">-</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Date de début:</div>
+                                    <div class="col-md-8 exchange-start-date">-</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Date de fin:</div>
+                                    <div class="col-md-8 exchange-end-date">-</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Propriétaire:</div>
+                                    <div class="col-md-8 exchange-owner">-</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Emprunteur:</div>
+                                    <div class="col-md-8 exchange-borrower">-</div>
+                                </div>
+                                <div class="row mb-2 exchange-price-row d-none">
+                                    <div class="col-md-4 fw-bold">Prix:</div>
+                                    <div class="col-md-8 exchange-price">-</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 fw-bold">Notes:</div>
+                                    <div class="col-md-8 exchange-notes">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary exchange-action-btn d-none">Action</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Return Modal -->
+    <div class="modal fade" id="confirmReturnModal" tabindex="-1" aria-labelledby="confirmReturnModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmReturnModalLabel">Confirmer le retour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Confirmez-vous avoir reçu le livre <span class="return-book-title fw-bold"></span> ?</p>
+                    <div class="mb-3">
+                        <label for="returnCondition" class="form-label">État du livre au retour</label>
+                        <select class="form-select" id="returnCondition">
+                            <option value="excellent">Excellent - Comme neuf</option>
+                            <option value="good" selected>Bon - Légères traces d'usure</option>
+                            <option value="fair">Correct - Usure visible</option>
+                            <option value="poor">Mauvais - Dommages significatifs</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="returnNotes" class="form-label">Notes (optionnel)</label>
+                        <textarea class="form-control" id="returnNotes" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary confirm-return-btn">Confirmer le retour</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>BookExchange</h5>
+                    <p>Plateforme d'échange et prêt de livres entre étudiants</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Accueil</a></li>
+                        <li><a href="catalog.html" class="text-white">Catalogue</a></li>
+                        <li><a href="#" class="text-white">À propos</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Nous suivre</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2023 BookExchange. Tous droits réservés.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/books.js"></script>
+    <script src="assets/js/exchanges.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

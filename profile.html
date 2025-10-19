@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur - BookExchange</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">BookExchange</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Catalogue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Ajouter un livre</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav auth-nav">
+                    <li class="nav-item dropdown user-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i> <span class="username">Utilisateur</span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item active" href="profile.html">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="messages.html">Messages <span class="badge bg-danger message-badge d-none">0</span></a></li>
+                            <li><a class="dropdown-item" href="exchange-history.html">Historique des échanges</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-link" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item login-link">
+                        <a class="nav-link" href="login.html">Connexion</a>
+                    </li>
+                    <li class="nav-item register-link">
+                        <a class="nav-link" href="register.html">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Message Container -->
+    <div class="flash-message-container"></div>
+
+    <!-- Profile Container -->
+    <div class="container my-5" id="profileContainer">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card profile-card">
+                    <div class="card-body text-center">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle fa-6x"></i>
+                        </div>
+                        <h3 class="profile-username mt-3">Chargement...</h3>
+                        <p class="text-muted profile-university">Université</p>
+                        <p class="text-muted profile-study">Domaine d'étude</p>
+                        <div class="profile-stats mt-4">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="stats-item">
+                                        <h4 class="profile-books-count">0</h4>
+                                        <span>Livres</span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="stats-item">
+                                        <h4 class="profile-exchanges-count">0</h4>
+                                        <span>Échanges</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-3 edit-profile-btn">Modifier le profil</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- User Books -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Mes livres</h5>
+                        <a href="add-book.html" class="btn btn-sm btn-primary">Ajouter un livre</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="user-books-container">
+                            <p class="text-center text-muted no-books-message">Aucun livre trouvé</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Profile Form -->
+                <div class="card edit-profile-form d-none">
+                    <div class="card-header">
+                        <h5 class="mb-0">Modifier le profil</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert" id="editProfileAlert" style="display: none;"></div>
+                        <form id="editProfileForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="university" class="form-label">Université</label>
+                                <input type="text" class="form-control" id="university" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="studyField" class="form-label">Domaine d'étude</label>
+                                <input type="text" class="form-control" id="studyField" required>
+                            </div>
+                            <hr>
+                            <h6>Changer le mot de passe</h6>
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Mot de passe actuel</label>
+                                <input type="password" class="form-control" id="currentPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">Nouveau mot de passe</label>
+                                <input type="password" class="form-control" id="newPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                <input type="password" class="form-control" id="confirmPassword">
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary cancel-edit-btn">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+ <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>BookExchange</h5>
+                    <p>Plateforme d'échange de livres entre étudiants.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Accueil</a></li>
+                        <li><a href="catalog.html" class="text-white">Catalogue</a></li>
+                        <li><a href="add-book.html" class="text-white">Ajouter un livre</a></li>
+                        <li><a href="register.html" class="text-white">S'inscrire</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> bookexchange@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +212 687982130</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 BookExchange.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/books.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - BookExchange</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">BookExchange</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalog.html">Catalogue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Ajouter un livre</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown" id="userDropdown" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> <span id="username">Utilisateur</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="profile.html">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="messages.html">Messages <span class="badge bg-danger" id="msgCount" style="display: none;">0</span></a></li>
+                            <li><a class="dropdown-item" href="exchange-history.html">Historique des échanges</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn">Déconnexion</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" id="loginBtn">
+                        <a class="nav-link" href="login.html">Connexion</a>
+                    </li>
+                    <li class="nav-item" id="registerBtn">
+                        <a class="nav-link" href="register.html">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="mb-4">Catalogue de livres</h1>
+
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Rechercher un livre...">
+                    <button class="btn btn-primary" type="button" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <select class="form-select" id="typeFilter">
+                    <option value="">Tous les types</option>
+                    <option value="loan">Prêt</option>
+                    <option value="exchange">Échange</option>
+                    <option value="sale">Vente</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="statusFilter">
+                    <option value="">Tous les statuts</option>
+                    <option value="available">Disponible</option>
+                    <option value="borrowed">Emprunté</option>
+                    <option value="unavailable">Non disponible</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row g-4" id="recentBooks">
+                <div class="col-md-3">
+                    <div class="card book-card h-100">
+                        <div class="position-relative">
+                            <img src="/assets/images/le-seigneur-des-anneaux.jpg" class="card-img-top" alt="Couverture du livre">
+                            <span class="book-status status-available">Disponible</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Le Seigneur des Anneaux</h5>
+                            <p class="book-author">J.R.R. Tolkien</p>
+                            <p class="card-text"><small class="text-muted">Prêt - Très bon état</small></p>
+                            <a href="book-details.html?id=1" class="btn btn-sm btn-primary">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card book-card h-100">
+                        <div class="position-relative">
+                            <img src="/assets/images/OIP.webp" class="card-img-top" alt="Couverture du livre">
+                            <span class="book-status status-available">Disponible</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Harry Potter à l'école des sorciers</h5>
+                            <p class="book-author">J.K. Rowling</p>
+                            <p class="card-text"><small class="text-muted">Vente - 10€ - Bon état</small></p>
+                            <a href="book-details.html?id=2" class="btn btn-sm btn-primary">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card book-card h-100">
+                        <div class="position-relative">
+                            <img src="/assets/images/1984.jpeg" class="card-img-top" alt="Couverture du livre">
+                            <span class="book-status status-available">Disponible</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">1984</h5>
+                            <p class="book-author">George Orwell</p>
+                            <p class="card-text"><small class="text-muted">Échange - Bon état</small></p>
+                            <a href="book-details.html?id=3" class="btn btn-sm btn-primary">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card book-card h-100">
+                        <div class="position-relative">
+                            <img src="/assets/images/etr.jpeg" class="card-img-top" alt="Couverture du livre">
+                            <span class="book-status status-available">Disponible</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">L'Étranger</h5>
+                            <p class="book-author">Albert Camus</p>
+                            <p class="card-text"><small class="text-muted">Prêt - État moyen</small></p>
+                            <a href="book-details.html?id=4" class="btn btn-sm btn-primary">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center" id="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Suivant</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Footer -->
+   <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>BookExchange</h5>
+                    <p>Plateforme d'échange de livres entre étudiants.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Accueil</a></li>
+                        <li><a href="catalog.html" class="text-white">Catalogue</a></li>
+                        <li><a href="add-book.html" class="text-white">Ajouter un livre</a></li>
+                        <li><a href="register.html" class="text-white">S'inscrire</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> bookexchange@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +212 687982130</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 BookExchange.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/books.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

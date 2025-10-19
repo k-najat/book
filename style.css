@@ -1,0 +1,249 @@
+/* General Styles */
+:root {
+    --primary-color: #4e73df;
+    --secondary-color: #f8f9fc;
+    --success-color: #1cc88a;
+    --danger-color: #e74a3b;
+    --warning-color: #f6c23e;
+    --dark-color: #5a5c69;
+    --light-color: #f8f9fa;
+}
+
+body {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+}
+
+/* Header & Navigation */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #e8eaed 100%);
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+/* Feature Icons */
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+/* Book Cards */
+.book-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.book-card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.book-author {
+    font-style: italic;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.book-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.status-available {
+    background-color: var(--success-color);
+}
+
+.status-borrowed {
+    background-color: var(--warning-color);
+}
+
+.status-unavailable {
+    background-color: var(--danger-color);
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+.alert-dismissible {
+    position: relative;
+}
+
+/* User Profile */
+.profile-header {
+    background-color: var(--secondary-color);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+}
+
+.profile-stat {
+    text-align: center;
+}
+
+.profile-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.profile-stat-label {
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+
+/* Messages */
+.messages-container {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    max-width: 75%;
+}
+
+.message-sent {
+    background-color: var(--primary-color);
+    color: white;
+    margin-left: auto;
+}
+
+.message-received {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.message-time {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    text-align: right;
+}
+
+.conversation-item {
+    transition: background-color 0.2s ease;
+}
+
+.conversation-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.conversation-item.active {
+    background-color: rgba(78, 115, 223, 0.1);
+    border-left: 3px solid var(--primary-color);
+}
+
+/* Exchange History */
+.exchange-badge {
+    font-size: 0.8rem;
+    padding: 0.35em 0.65em;
+}
+
+.exchange-type-loan {
+    background-color: #4e73df;
+}
+
+.exchange-type-exchange {
+    background-color: #1cc88a;
+}
+
+.exchange-type-sale {
+    background-color: #f6c23e;
+}
+
+.exchange-status-pending {
+    background-color: #f6c23e;
+}
+
+.exchange-status-active {
+    background-color: #4e73df;
+}
+
+.exchange-status-completed {
+    background-color: #1cc88a;
+}
+
+.exchange-status-cancelled {
+    background-color: #e74a3b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .messages-container {
+        height: 300px;
+    }
+}
+
+/* Custom SVG placeholder for book covers */
+.book-cover-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+/* Flash messages */
+.flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 350px;
+}
+#bookCover{
+    height: 100vh;
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du livre | BookExchange</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-open text-primary me-2"></i>
+                <span class="fw-bold">BookExchange</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalog.html">Catalogue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Ajouter un livre</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav auth-nav">
+                    <li class="nav-item dropdown user-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span class="username">Utilisateur</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="messages.html">Messages <span class="badge bg-primary message-badge d-none">0</span></a></li>
+                            <li><a class="dropdown-item" href="exchange-history.html">Historique d'échanges</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-btn" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item guest-nav">
+                        <a class="nav-link" href="login.html">Connexion</a>
+                    </li>
+                    <li class="nav-item guest-nav">
+                        <a class="nav-link" href="register.html">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Message Container -->
+    <div class="container mt-3">
+        <div class="flash-message-container"></div>
+    </div>
+
+    <!-- Book Details Section -->
+    <section class="container my-5">
+        <div class="row">
+            <!-- Book Cover -->
+            <div class="col-md-4 mb-4">
+                <div class="book-cover-large shadow">
+                    <img src="assets/images/book-placeholder.svg" alt="Book Cover" class="img-fluid book-cover" id="bookCover">
+                    <div class="book-status-badge" id="bookStatusBadge"></div>
+                </div>
+            </div>
+            
+            <!-- Book Information -->
+            <div class="col-md-8">
+                <h1 class="book-title mb-2" id="bookTitle">Titre du livre</h1>
+                <h5 class="text-muted mb-3" id="bookAuthor">Auteur du livre</h5>
+                
+                <div class="book-type-badge mb-3" id="bookTypeBadge"></div>
+                
+                <div class="book-details mb-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>ISBN:</strong> <span id="bookIsbn">-</span></p>
+                            <p><strong>Éditeur:</strong> <span id="bookPublisher">-</span></p>
+                            <p><strong>Année de publication:</strong> <span id="bookYear">-</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Langue:</strong> <span id="bookLanguage">-</span></p>
+                            <p><strong>Pages:</strong> <span id="bookPages">-</span></p>
+                            <p><strong>État:</strong> <span id="bookCondition">-</span></p>
+                        </div>
+                    </div>
+                    <p><strong>Catégories:</strong> <span id="bookCategories">-</span></p>
+                    <p class="book-price-section d-none"><strong>Prix:</strong> <span id="bookPrice">-</span> €</p>
+                </div>
+                
+                <div class="book-description mb-4">
+                    <h5>Description</h5>
+                    <p id="bookDescription">Description du livre...</p>
+                </div>
+                
+                <div class="book-owner mb-4">
+                    <h5>Proposé par</h5>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-circle fs-1 text-secondary me-3"></i>
+                        <div>
+                            <a href="#" class="text-decoration-none fw-bold" id="ownerUsername">Nom d'utilisateur</a>
+                            <p class="text-muted mb-0" id="ownerUniversity">Université</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="book-actions">
+                    <div class="action-buttons d-none" id="userActions">
+                        <button class="btn btn-primary me-2" id="requestLoanBtn">
+                            <i class="fas fa-handshake me-1"></i> Demander un prêt
+                        </button>
+                        <button class="btn btn-success me-2" id="requestExchangeBtn">
+                            <i class="fas fa-exchange-alt me-1"></i> Proposer un échange
+                        </button>
+                        <button class="btn btn-warning me-2 d-none" id="buyBtn">
+                            <i class="fas fa-shopping-cart me-1"></i> Acheter
+                        </button>
+                        <button class="btn btn-outline-primary" id="contactOwnerBtn">
+                            <i class="fas fa-comment me-1"></i> Contacter
+                        </button>
+                    </div>
+                    
+                    <div class="owner-actions d-none" id="ownerActions">
+                        <button class="btn btn-outline-primary me-2" id="editBookBtn">
+                            <i class="fas fa-edit me-1"></i> Modifier
+                        </button>
+                        <button class="btn btn-outline-danger" id="deleteBookBtn">
+                            <i class="fas fa-trash me-1"></i> Supprimer
+                        </button>
+                    </div>
+                    
+                    <div class="guest-actions" id="guestActions">
+                        <p class="alert alert-info">
+                            <i class="fas fa-info-circle me-1"></i> 
+                            Connectez-vous pour demander un prêt, proposer un échange ou contacter le propriétaire.
+                        </p>
+                        <a href="login.html" class="btn btn-primary me-2">Se connecter</a>
+                        <a href="register.html" class="btn btn-outline-primary">S'inscrire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Exchange Request Modal -->
+    <div class="modal fade" id="exchangeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exchangeModalTitle">Demande de prêt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="exchangeForm">
+                        <div class="mb-3">
+                            <label for="exchangeNotes" class="form-label">Message au propriétaire</label>
+                            <textarea class="form-control" id="exchangeNotes" rows="3" placeholder="Expliquez pourquoi vous souhaitez ce livre..."></textarea>
+                        </div>
+                        <input type="hidden" id="exchangeType" value="loan">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submitExchangeBtn">Envoyer la demande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmer la suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir supprimer ce livre ? Cette action est irréversible.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+   <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>BookExchange</h5>
+                    <p>Plateforme d'échange de livres entre étudiants.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Accueil</a></li>
+                        <li><a href="catalog.html" class="text-white">Catalogue</a></li>
+                        <li><a href="add-book.html" class="text-white">Ajouter un livre</a></li>
+                        <li><a href="register.html" class="text-white">S'inscrire</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> bookexchange@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +212 687982130</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 BookExchange.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/books.js"></script>
+    <script src="assets/js/exchanges.js"></script>
+    <script src="assets/js/messages.js"></script>
+    <script src="assets/js/book-details.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

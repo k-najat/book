@@ -399,7 +399,7 @@ function showExchangeDetails(exchangeId) {
     // Book cover
     const bookCover = document.querySelector('.book-cover');
     if (bookCover) {
-        bookCover.src = book.coverUrl || 'assets/images/book-placeholder.svg';
+        bookCover.src = book.coverUrl || 'book-placeholder.svg';
     }
     
     // Show modal

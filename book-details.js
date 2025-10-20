@@ -40,7 +40,7 @@ function loadBookDetails() {
         if (book.title === 'Le Seigneur des Anneaux') {
             bookCover.src = 'le-seigneur-des-anneaux.jpg';
         } else if (book.title === '1984') {
-            bookCover.src = '/1984.jpeg';
+            bookCover.src = '1984.jpeg';
         } else if (book.title === 'L\'Étranger') {
             bookCover.src = 'etr.jpeg';
         } else if (book.title === 'Harry Potter à l\'école des sorciers') {

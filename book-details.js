@@ -38,13 +38,13 @@ function loadBookDetails() {
     if (bookCover) {
         // Utiliser les images du dossier assets/images en fonction du titre du livre
         if (book.title === 'Le Seigneur des Anneaux') {
-            bookCover.src = 'assets/images/le-seigneur-des-anneaux.jpg';
+            bookCover.src = 'le-seigneur-des-anneaux.jpg';
         } else if (book.title === '1984') {
-            bookCover.src = 'assets/images/1984.jpeg';
+            bookCover.src = '/1984.jpeg';
         } else if (book.title === 'L\'Étranger') {
-            bookCover.src = 'assets/images/etr.jpeg';
+            bookCover.src = 'etr.jpeg';
         } else if (book.title === 'Harry Potter à l\'école des sorciers') {
-            bookCover.src = 'assets/images/OIP.webp';
+            bookCover.src = 'OIP.webp';
         } else {
             // Mettre à jour la propriété coverUrl dans l'objet book pour les autres livres
             book.coverUrl = 'assets/images/acc.svg';

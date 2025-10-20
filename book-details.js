@@ -47,7 +47,7 @@ function loadBookDetails() {
             bookCover.src = 'OIP.webp';
         } else {
             // Mettre à jour la propriété coverUrl dans l'objet book pour les autres livres
-            book.coverUrl = 'assets/images/acc.svg';
+            book.coverUrl = 'acc.svg';
             bookCover.src = book.coverUrl;
         }
         bookCover.alt = book.title;
